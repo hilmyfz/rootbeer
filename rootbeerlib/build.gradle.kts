@@ -95,11 +95,11 @@ publishing {
 }
 
 signing {
-    val signingKey = findStringPropertyOrDefault("SIGNING_KEY_ID")
-    val signingPassword = findStringPropertyOrDefault("SIGNING_PASSWORD")
-    val signingSecretKey = findStringPropertyOrDefault("SIGNING_SECRET_KEY_RING_FILE")
+    val signingKey = findProperty("SIGNING_KEY_ID") as String?
+    val signingPassword = findProperty("SIGNING_PASSWORD") as String?
+    val signingSecretKey = findProperty("SIGNING_SECRET_KEY_RING_FILE") as String?
     
-    if (signingKey.isNotEmpty() && signingPassword.isNotEmpty() && signingSecretKey.isNotEmpty()) {
+    if (!signingKey.isNullOrEmpty() && !signingPassword.isNullOrEmpty() && !signingSecretKey.isNullOrEmpty()) {
         sign(publishing.publications["release"])
     }
 }
