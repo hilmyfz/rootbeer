@@ -95,8 +95,17 @@ publishing {
 }
 
 signing {
-    sign(publishing.publications["release"])
+    val signingKey = findStringPropertyOrDefault("SIGNING_KEY_ID")
+    val signingPassword = findStringPropertyOrDefault("SIGNING_PASSWORD")
+    val signingSecretKey = findStringPropertyOrDefault("SIGNING_SECRET_KEY_RING_FILE")
+    
+    if (signingKey.isNotEmpty() && signingPassword.isNotEmpty() && signingSecretKey.isNotEmpty()) {
+        sign(publishing.publications["release"])
+    }
 }
+//signing {
+//    sign(publishing.publications["release"])
+//}
 
 private fun Project.findStringPropertyOrDefault(propertyName: String, default: String? = "") =
     findProperty(propertyName)?.toString() ?: default
