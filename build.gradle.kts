@@ -50,6 +50,8 @@ subprojects {
         }
     }
 
+    // REMOVE or COMMENT OUT the below blocks for JitPack compatibility
+    /*
     plugins.withType<MavenPublishPlugin>().configureEach {
         extensions.configure<PublishingExtension> {
             repositories {
@@ -76,6 +78,7 @@ subprojects {
             isRequired = isReleaseBuild
         }
     }
+    */
 }
 
 val clean by tasks.registering(type = Delete::class) {
